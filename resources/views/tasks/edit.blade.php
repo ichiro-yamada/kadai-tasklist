@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if (Auth::check())
+@if (Auth::id() === $task->user_id)
     <h1>id: {{ $task->id }} のタスク編集ページ</h1>
 
     <div class="row">
@@ -28,7 +28,7 @@
         <div class="text-center">
             <h1>Welcome to the tasklist</h1>
             
-            {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+            {!! link_to_route('signup.get', 'Return to your top page!', [], ['class' => 'btn btn-lg btn-primary']) !!}
         </div>
     </div>
 @endif

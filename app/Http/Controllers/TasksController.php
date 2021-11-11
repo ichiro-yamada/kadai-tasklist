@@ -36,12 +36,12 @@ class TasksController extends Controller
      */
     public function create()
     {
-        $task = new Task;
-
-        // タスク作成ビューを表示
-        return view('tasks.create', [
-            'task' => $task,
-        ]);
+            $task = new Task;
+    
+            // タスク作成ビューを表示
+            return view('tasks.create', [
+                'task' => $task,
+            ]);
     }
 
     /**
@@ -52,17 +52,17 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //バリデーション
-        $request->validate([
-            'status' => 'required|max:10', 
-            'content' => 'required|max:255',
-         ]);
-         
-        $request->user()->tasks()->create([
-            'status' => $request->status,
-            'content' => $request->content,
-        ]);
-        return redirect('/');
+            //バリデーション
+            $request->validate([
+                'status' => 'required|max:10', 
+                'content' => 'required|max:255',
+             ]);
+             
+            $request->user()->tasks()->create([
+                'status' => $request->status,
+                'content' => $request->content,
+            ]);
+            return redirect('/');
     }
 
     /**
@@ -73,13 +73,13 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-          // idの値でタスクを検索して取得
-        $task = Task::findOrFail($id);
-        
-        // タスク詳細ビューでそれらを表示
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+              // idの値でタスクを検索して取得
+            $task = Task::findOrFail($id);
+            
+            // タスク詳細ビューでそれらを表示
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
     }
 
     /**
@@ -90,13 +90,13 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        // idの値でタスクを検索して取得
-        $task = Task::findOrFail($id);
-
-        // タスク編集ビューでそれを表示
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+            // idの値でタスクを検索して取得
+            $task = Task::findOrFail($id);
+    
+            // タスク編集ビューでそれを表示
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
     }
 
     /**
@@ -137,7 +137,7 @@ class TasksController extends Controller
     {
          // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
-        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は,タスクを削除
         if (\Auth::id() === $task->user_id) {
             $task->delete();
         }
